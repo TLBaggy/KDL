@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="LAPTOP-6B6J647F_TLBAGGY_SQL.DuLieuLamSach"
+  DTS:DTSID="{A1DA9834-1847-48ED-8178-016CF2611381}"
+  DTS:CreationName="ADO">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=LAPTOP-6B6J647F\TLBAGGY_SQL;Initial Catalog=DuLieuLamSach;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-QuaTrinhETL_SSIS-{A1DA9834-1847-48ED-8178-016CF2611381}LAPTOP-6B6J647F\TLBAGGY_SQL.DuLieuLamSach;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
