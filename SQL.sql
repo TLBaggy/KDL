@@ -1,0 +1,13 @@
+DELETE FROM [dbo].[Fact_Sales]
+DELETE FROM [dbo].[Fact_Shipping]
+DELETE FROM[dbo].[Dim_Shipping_Mode]
+DELETE FROM[dbo].[Dim_Product]
+DELETE FROM[dbo].[Dim_Market]
+DELETE FROM[dbo].[Dim_Location]
+DELETE FROM[dbo].[Dim_Department]
+DELETE FROM[dbo].[Dim_Date]
+DELETE FROM[dbo].[Dim_Customer]
+DELETE FROM[dbo].[Dim_Category]
+
+DELETE FROM [dbo].[Clear_Data]
+DELETE FROM [dbo].[NULL_DATABASE]

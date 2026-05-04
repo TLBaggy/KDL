@@ -1,0 +1,80 @@
+﻿--Top 5 thành phố tại bang California có tổng doanh thu cao nhất
+SELECT 
+   [Measures].[Sales Amount] ON 0,
+    TOPCOUNT(  
+        FILTER(
+            [Dim Location].[City].MEMBERS,
+ ([Dim Location].[State].&[California], [Dim Location].[City].CURRENTMEMBER,                 
+   [Measures].[Sales Amount]) > 0),5,
+([Dim Location].[State].&[California], [Dim Location].[City].CURRENTMEMBER,                 
+   [Measures].[Sales Amount])
+     ) ON 1
+FROM [DONHANG]
+
+
+--Số đơn giao trễ (Actual > Scheduled) phân theo phương thức vận chuyển Standard/Express theo năm
+SELECT
+    [Dim Shipping Mode].[Shipping Mode].MEMBERS ON ROWS,
+    [Measures].[Late Delivery Risk]ON COLUMNS
+FROM [DONHANG]
+WHERE (
+    FILTER(
+        [Dim Date].[Year].MEMBERS,
+        [Measures].[Days For Shipping Real]> [Measures].[Days For Shipment Scheduled]
+    )
+)
+
+
+--Thống kê số đơn hàng của các cửa hàng (department) có doanh thu trên 1.000 USD trong các năm
+SELECT
+    [Measures].[Fact Sales Count] ON 0,
+    [Dim Date].[Year].MEMBERS ON 1
+FROM [DONHANG]
+WHERE (
+    FILTER(
+        [Dim Department].[Department Name].MEMBERS,
+        [Measures].[Sales Amount] > 1000
+    )
+)
+
+
+--Phân tích doanh thu và lợi nhuận của phân khúc “Golf” theo năm
+SELECT
+    {[Measures].[Sales Amount], [Measures].[Benefit Per Order]} ON COLUMNS,
+    [Dim Date].[Year].MEMBERS ON ROWS
+FROM [DONHANG]
+WHERE ([Dim Customer].[Customer Segment].&[Corporate])
+
+
+--Tổng số đơn hàng của Department “Electronics” phân theo thành phố
+SELECT
+    [Dim Location].[City].MEMBERS ON ROWS,
+    [Measures].[Fact Sales Count] ON COLUMNS
+FROM [DONHANG]
+WHERE ([Dim Department].[Department Name].&[Golf])
+
+
+--Doanh thu và lợi nhuận theo Market (APAC, EMEA, US) qua các năm
+SELECT
+  { 
+    [Measures].[Sales Amount], 
+    [Measures].[Benefit Per Order] 
+  } ON COLUMNS,
+  CROSSJOIN(
+    [Dim Market].[Market].Members,
+    [Dim Date].[Year].Members
+  ) ON ROWS
+
+FROM [DONHANG];
+
+
+--Top 10 sản phẩm bán chạy nhất theo Sales Amount
+SELECT
+    [Measures].[Sales Amount] ON 0,
+    TOPCOUNT(
+        [Dim Product].[Product Name].MEMBERS,
+        10,
+        [Measures].[Sales Amount]
+    ) ON 1
+FROM [DONHANG]
+
